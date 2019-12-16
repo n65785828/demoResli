@@ -1,0 +1,25 @@
+server:
+  port: 8002
+spring:
+  application:
+    name: user
+  cloud:
+    consul:
+        host: 127.0.0.1
+        port: 8500
+        discovery:
+           register: false
+resilience4j.circuitbreaker:
+  instances:
+    backendA:
+      registerHealthIndicator: true
+      slidingWindowSize: 100
+    backendB:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 20
+      waitDurationInOpenState: 2s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
