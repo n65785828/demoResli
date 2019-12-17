@@ -27,6 +27,7 @@ public class ActivityController {
     @PostMapping("firstLoginActivityError")
     public String firstLoginError(@RequestBody Long id) throws InterruptedException{
         throw new RuntimeException("运行异常");
+      // return "用户"+id+",你好，现在服务正常了！";
     }
 
 

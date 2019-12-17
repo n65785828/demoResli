@@ -18,4 +18,15 @@ public class UserController {
     public String registryUser(@RequestBody User user){
         return activeService.activeFirstRegistry(user.getId());
     }
+
+
+    @PostMapping("registryUser1")
+    public String registryUser1(@RequestBody User user){
+        return activeService.activeFirstRegistryError(user.getId());
+    }
+
+    @PostMapping("registryUser2")
+    public String registryUser2(@RequestBody User user){
+        return activeService.activeFirstRegistryByFeign(user.getId());
+    }
 }
