@@ -21,17 +21,17 @@ public class ActiveService {
     private UserFeign userFeign;
 
     public String activeFirstRegistry(Long id) {
-        return cbFactory.create("activeFirstRegistry").run(() -> restTemplate.postForObject("http://activity/firstLoginActivity", id, String.class), throwable -> "访问服务出错1");
+        return cbFactory.create("firstCb").run(() -> restTemplate.postForObject("http://activity/firstLoginActivity", id, String.class), throwable -> "访问服务出错1");
     }
 
 
     public String activeFirstRegistryError(Long id) {
-        return cbFactory.create("activeFirstRegistryErrorTimeOut").run(() -> restTemplate.postForObject("http://activity/firstLoginActivityTimeOut", id, String.class), throwable -> "访问服务出错2");
+        return cbFactory.create("timeoutCb").run(() -> restTemplate.postForObject("http://activity/firstLoginActivityTimeOut", id, String.class), throwable -> "访问服务出错2");
     }
 
 
     public String activeFirstRegistryByFeign(Long id) {
-        return cbFactory.create("activeFirstRegistryByFeign").run(() -> userFeign.firstLoginError(id), throwable -> "访问服务出错3"+throwable.getMessage());
+        return cbFactory.create("feignCb").run(() -> userFeign.firstLoginError(id), throwable -> "访问服务出错3"+throwable.getMessage());
     }
 
 }
